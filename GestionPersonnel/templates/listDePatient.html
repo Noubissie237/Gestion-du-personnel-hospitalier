@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Liste des patients</title>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Liste des patients</h1>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prenoms</th>
+            <th>Sexe</th>
+            <th>Age</th>
+            <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for elt in data %} 
+        <tr>
+            <td>{{ elt.nom }}</td>
+            <td>{{ elt.prenom }}</td>
+            {% if elt.sexe == 1 %}
+                <td>MASCULIN</td>
+            {% else %}
+                <td>FEMININ</td>
+            {% endif %}
+            <td>{{ elt.age }}</td>
+            <td>{{ elt.email }}</td>
+        </tr>
+    
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+
+</body>
+</html>

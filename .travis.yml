@@ -1,0 +1,19 @@
+language: python
+
+python:
+  - "3.9"
+
+install:
+  - pip install --upgrade pip
+  - pip install -r GestionPersonnel/requirements.txt
+
+script:
+  - cd GestionPersonnel
+  - python manage.py test
+
+notifications:
+  email:
+    recipients:
+      - wilfried.noubissie@facsciences-uy1.cm
+    on_success: always
+    on_failure: always
