@@ -13,17 +13,47 @@ class PatientViewSet(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
 
-def listDePatients(request):
+
+def home(request):
+    return render(request, 'personnel/home.html')
+
+def appointment(request):
+
+    # try:
+    #     url = 'http://localhost:8002/patients/'
+    #     response = requests.get(url)
+
+    #     if response.status_code == 200:
+    #         patients = response.json()
+    #         return render(request, 'personnel/appointment.html', context={"data" : patients})
+    #     else:
+    #         print('Erreur lors de la récupération des rendez-vous.')
+
+    # except:
+    #     return render(request, 'personnel/microFailed.html')
+
+    return render(request, 'personnel/appointment.html')
+
+def consultations(request):
+    return render(request, 'personnel/consultations.html')
+
+def prescription(request):
+    return render(request, 'personnel/prescription.html')
+
+def file_d_attente(request):
+
     try:
         url = 'http://localhost:8001/patients/'
         response = requests.get(url)
 
         if response.status_code == 200:
             patients = response.json()
-            return render(request, 'listDePatient.html', context={"data" : patients})
+            return render(request, 'personnel/file_d_attente.html', context={"data" : patients})
         else:
             print('Erreur lors de la récupération des patients.')
 
     except:
-        return HttpResponse("<h1 align='center' style='color:red'>Le micro service en charge de la gestion des patients semble être indisponible</h1>")
-
+        print("erreur")
+        return render(request, 'personnel/microFailed.html')
+    
+    # return render(request, 'personnel/file_d_attente.html')

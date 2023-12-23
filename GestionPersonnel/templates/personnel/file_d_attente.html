@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="col-12" style="margin-top: 15vh;">
+    <h2 class="text-center">File d'attente</h2>
+        <div class="card top-selling overflow-auto mt-5">  
+            <div class="card-body pb-0">  
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col">Images</th>
+                            <th scope="col">Noms</th>
+                            <th scope="col">Prénoms</th>
+                            <th scope="col">Sexes</th>
+                            <th scope="col">Ages</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for elt in data %}
+                        
+                            <tr>
+                                {% if elt.sexe == 1 %}
+                                    <th scope="row"><a href="#"><img src="{% static 'img/men.png' %}" width="25"></a></th>
+                                    {% else %}
+                                    <th scope="row"><a href="#"><img src="{% static 'img/women.jpeg' %}" width="25"></a></th>
+                                {% endif %}
+                                <td><a href="#" class="text-primary fw-bold">{{ elt.nom }}</a></td>
+                                <td> {{ elt.prenom }} </td>
+
+                                {% if elt.sexe == 1 %}
+                                    <td> MASCULIN </td>
+                                {% else %}
+                                    <td> FEMININ </td>
+                                {% endif %}
+
+                                <td class="fw-bold"> {{ elt.age }} </td>
+                                <td><span class="badge bg-warning">En attente</span></td>
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

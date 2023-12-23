@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>GESTION DU PERSONNEL</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link rel="shortcut icon" href="{% static 'img/fav.png' %}" type="image/x-icon">
+  <link href="{% static 'css/variables.css' %}" rel="stylesheet"> 
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'css/main.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top" data-scrollto-offset="0">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+
+      <a href="/home" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
+
+        <h1>Dr Noubissie<span>.</span></h1>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+
+          <li><a class="nav-link scrollto" href="/home">Accueil</a></li>
+          <li><a class="nav-link scrollto" href="/rendez-vous">Rendez-vous</a></li>
+          <li><a class="nav-link scrollto" href="/consultations">Consultations</a></li>
+          <li><a class="nav-link scrollto" href="/prescription">Prescriptions</a></li>
+          <li><a class="nav-link scrollto" href="/file-d-attente">File d'attente</a></li>
+
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle d-none"></i>
+      </nav><!-- .navbar -->
+
+      <a class="btn-getstarted scrollto bg-danger" href="#">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Déconnexion</span>
+      </a>
+    </div>
+  </header><!-- End Header -->
+
+
+  {% block content %}
+  {% endblock content %}
+
+  <main id="main">
+
+  <!-- Vendor JS Files -->
+  <!-- <script src="js/bootstrap.bundle.min.js"></script> -->
+  <script src="{% static 'aos/aos.js' %}"></script>
+  <script src="{% static 'glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
