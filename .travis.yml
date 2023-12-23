@@ -8,7 +8,8 @@ install:
   - pip install -r GestionPersonnel/requirements.txt
 
 script:
-  - python manage.py GestionPersonnel/test
+  - cd GestionPersonnel/
+  - python manage.py test
 
 notifications:
   email:
