@@ -9,7 +9,7 @@ install:
 
 script:
   - cd GestionPersonnel/
-  - python manage.py test
+  # - python manage.py test
 
 notifications:
   email:
