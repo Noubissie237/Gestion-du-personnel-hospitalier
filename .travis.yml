@@ -1,21 +1,15 @@
-sudo: required
+language: python
 
-services:
-  - docker
+python:
+  - "3.10"
 
-before_script:
-  - cd GestionPersonnel/
-  - docker-compose up -d
+install:
+  - pip install --upgrade pip
+  - pip install -r GestionPersonnel/requirements.txt
 
 script:
-  - echo "Build étape par Travis CI"
-
-after_success:
-  - echo "L'application a été déployée avec succès"
-  - docker-compose down
-
-after_failure:
-  - echo "Le déploiement a échoué"
+  - cd GestionPersonnel/
+  - python manage.py test
 
 notifications:
   email:
