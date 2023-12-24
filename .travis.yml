@@ -7,6 +7,9 @@ install:
   - pip install --upgrade pip
   - pip install -r GestionPersonnel/requirements.txt
 
+before_script:
+  - sudo apt upgrade
+
 script:
   - cd GestionPersonnel/
   - python manage.py test
