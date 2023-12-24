@@ -12,6 +12,7 @@ before_script:
 
 script:
   - cd GestionPersonnel/
+  - openssl version -a
   - python manage.py test
 
 notifications:
