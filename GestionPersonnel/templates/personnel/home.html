@@ -9,7 +9,7 @@
             <img src="{% static 'img/homeDoctor.svg' %} " class="img-fluid animated">
             
             {% if user.is_authenticated %}
-                <h2>Bonjour <span>Dr {{ name }}</span></h2>
+                <h2>Bonjour <span>Dr {{ user.username }}</span></h2>
             {% endif %}
             
             <p>Nous sommes heureux de vous revoir. Vos patients n'attendent que vous !!! </p>
