@@ -1,21 +1,17 @@
-language: python
+language: shell
 
-python:
-  - "3.9"
-
-install:
-  - pip install --upgrade pip
-  - pip install -r GestionPersonnel/requirements.txt
+services:
+  - docker
 
 before_script:
-  - sudo apt upgrade
-  - sudo apt update
-  - sudo apt install -y libssl-dev
+  - cd GestionPersonnel/
+  - docker-compose up -d
 
 script:
-  - cd GestionPersonnel/
-  - openssl version -a
-  - python manage.py test
+  - docker exec gestionpersonnel_web_1 python manage.py test
+
+after_script:
+  - docker-compose down
 
 notifications:
   email:
