@@ -1,15 +1,16 @@
-language: python
+language: bash
 
-python:
-  - "3.9"
+services:
+  - docker
 
-install:
-  - pip install --upgrade pip
-  - pip install -r GestionPersonnel/requirements.txt
+before_script:
+  - cd GestionPersonnel/
 
 script:
-  - cd GestionPersonnel/
-  - python manage.py test
+  - docker-compose up -d
+
+after_script:
+  - docker-compose down
 
 notifications:
   email:
