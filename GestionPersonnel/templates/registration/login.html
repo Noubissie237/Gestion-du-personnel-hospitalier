@@ -1,24 +1,97 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-  <h2 style="margin-top: 20%;">Connexion</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    <div class="form-group">
-      {{ form.username.label_tag }}
-      {{ form.username }}
-      {% for error in form.username.errors %}
-        <span class="text-danger">{{ error }}</span>
-      {% endfor %}
-    </div>
-    <div class="form-group">
-      {{ form.password.label_tag }}
-      {{ form.password }}
-      {% for error in form.password.errors %}
-        <span class="text-danger">{{ error }}</span>
-      {% endfor %}
-    </div>
-    <button type="submit" class="btn btn-primary">Se connecter</button>
-  </form>
-{% endblock %}
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>GESTION DU PERSONNEL</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'img/fav.png' %}" type="image/x-icon">
+    <link href="{% static 'css/variables.css' %}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <main>
+        <div class="container">
+
+            <section
+                class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                            <div class="d-flex justify-content-center py-4">
+                                <a href="index.html" class="logo d-flex align-items-center w-auto">
+                                    <img src="assets/img/logo.png" alt="">
+                                    <span class="d-none d-lg-block">Médecin</span>
+                                </a>
+                            </div><!-- End Logo -->
+
+                            <div class="card mb-3">
+
+                                <div class="card-body">
+
+                                    <div class="pt-4 pb-2">
+                                        <h5 class="card-title text-center pb-0 fs-4">Connectez-vous</h5>
+                                        <p class="text-center small">Entrez vos informations de connexion</p>
+                                    </div>
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        {{ form.non_field_errors }}
+                                        <div class="form-group">
+                                            {{ form.username.label_tag}}
+                                            {{ form.username }}
+                                            {% for error in form.username.errors %}
+                                            <span class="text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div><br>
+                                        <div class="form-group">
+                                            {{ form.password.label_tag }}<br>
+                                            {{ form.password }}
+                                            {% for error in form.password.errors %}
+                                            <span class="text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div><br><br>
+                                        <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </main><!-- End #main -->
+
+
+    <!-- Vendor JS Files -->
+    <!-- <script src="js/bootstrap.bundle.min.js"></script> -->
+    <script src="{% static 'aos/aos.js' %}"></script>
+    <script src="{% static 'glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'swiper/swiper-bundle.min.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

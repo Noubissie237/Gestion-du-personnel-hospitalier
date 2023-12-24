@@ -7,7 +7,7 @@ router.register(r'medecins', MedecinViewSet)
 
 urlpatterns = [
     # path('', include(router.urls)),
-    path('', login_view),
+    path('', home),
     path('home/', home),
     path('rendez-vous/', appointment),
     path('consultations/', consultations),

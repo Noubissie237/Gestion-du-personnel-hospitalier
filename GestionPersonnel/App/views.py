@@ -14,10 +14,11 @@ class MedecinViewSet(viewsets.ModelViewSet):
     queryset = Medecin.objects.all()
     serializer_class = MedecinSerializer
 
-@login_required
+@login_required(login_url='/login')
 def home(request):
     return render(request, 'personnel/home.html')
 
+@login_required(login_url='/login')
 def appointment(request):
 
     # try:
@@ -35,12 +36,15 @@ def appointment(request):
 
     return render(request, 'personnel/appointment.html')
 
+@login_required(login_url='/login')
 def consultations(request):
     return render(request, 'personnel/consultations.html')
 
+@login_required(login_url='/login')
 def prescription(request):
     return render(request, 'personnel/prescription.html')
 
+@login_required(login_url='/login')
 def file_d_attente(request):
 
     try:
@@ -68,7 +72,7 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('/file-d-attente')
+                return render(request, 'personnel/home.html', context={'name' : username})
             else:
                 form.add_error(None, "Nom d'utilisateur ou mot de passe incorrect.")
     else:
@@ -77,4 +81,4 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('accueil')
+    return redirect('/login')
