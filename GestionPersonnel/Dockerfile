@@ -12,6 +12,8 @@ COPY . /app/
 
 RUN apt-get upgrade
 
+RUN pip install --upgrade pip
+
 RUN apt install -y openssl libssl-dev
 
 RUN pip install -r requirements.txt
