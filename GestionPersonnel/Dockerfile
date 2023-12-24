@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.10
 
 ENV PYTHONDONTWRITEBYTECODE 1
 
@@ -12,7 +12,7 @@ COPY . /app/
 
 RUN apt-get upgrade
 
-RUN pip install --upgrade pip
+RUN pip install --upgrade pip==23.0.1
 
 RUN apt install -y openssl libssl-dev
 
