@@ -1,19 +1,20 @@
 from django.http import HttpResponse
 import requests
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework import viewsets
-from .models import Patient, Medecin
-from .serializers import PatientSerializer, MedecinSerializer
+from .models import Medecin
+from .serializers import MedecinSerializer
+from django.contrib.auth import authenticate, login, logout
+from .forms import LoginForm
+from django.contrib.auth.decorators import login_required
+
+
 
 class MedecinViewSet(viewsets.ModelViewSet):
     queryset = Medecin.objects.all()
     serializer_class = MedecinSerializer
 
-class PatientViewSet(viewsets.ModelViewSet):
-    queryset = Patient.objects.all()
-    serializer_class = PatientSerializer
-
-
+@login_required
 def home(request):
     return render(request, 'personnel/home.html')
 
@@ -57,3 +58,23 @@ def file_d_attente(request):
         return render(request, 'personnel/microFailed.html')
     
     # return render(request, 'personnel/file_d_attente.html')
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('/file-d-attente')
+            else:
+                form.add_error(None, "Nom d'utilisateur ou mot de passe incorrect.")
+    else:
+        form = LoginForm()
+    return render(request, 'registration/login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('accueil')

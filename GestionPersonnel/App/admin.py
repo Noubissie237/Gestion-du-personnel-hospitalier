@@ -5,8 +5,5 @@ from .models import *
 class medecinAdmin(admin.ModelAdmin):
     list_display = ('nom', 'prenom', 'email', 'password')
 
-class patientAdmin(admin.ModelAdmin):
-    list_display = ('nom', 'medecin_attitré')
 
 admin.site.register(Medecin, medecinAdmin)
-admin.site.register(Patient, patientAdmin)

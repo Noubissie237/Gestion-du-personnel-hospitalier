@@ -4,14 +4,15 @@ from .views import *
 
 router = DefaultRouter()
 router.register(r'medecins', MedecinViewSet)
-router.register(r'patients', PatientViewSet)
 
 urlpatterns = [
     # path('', include(router.urls)),
-    path('', home),
+    path('', login_view),
     path('home/', home),
     path('rendez-vous/', appointment),
     path('consultations/', consultations),
     path('prescription/', prescription),
     path('file-d-attente/', file_d_attente),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
 ]
