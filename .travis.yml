@@ -9,6 +9,8 @@ install:
 
 before_script:
   - sudo apt upgrade
+  - sudo apt update
+  - sudo apt install -y libssl-dev
 
 script:
   - cd GestionPersonnel/
