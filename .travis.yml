@@ -1,16 +1,20 @@
-language: bash
+sudo: required
 
 services:
   - docker
 
 before_script:
   - cd GestionPersonnel/
+  - docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
 
 script:
-  - docker-compose up -d
+  - echo "Build étape par Travis CI"
 
-after_script:
-  - docker-compose down
+after_success:
+  - echo "L'application a été déployée avec succès"
+
+after_failure:
+  - echo "Le déploiement a échoué"
 
 notifications:
   email:
