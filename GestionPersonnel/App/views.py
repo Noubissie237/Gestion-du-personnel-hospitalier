@@ -9,7 +9,6 @@ from .forms import LoginForm
 from django.contrib.auth.decorators import login_required
 
 
-
 class MedecinViewSet(viewsets.ModelViewSet):
     queryset = Medecin.objects.all()
     serializer_class = MedecinSerializer
@@ -72,7 +71,7 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return render(request, 'personnel/home.html', context={'name' : username})
+                return render(request, 'personnel/home.html', context={'name' : request.user.username})
             else:
                 form.add_error(None, "Nom d'utilisateur ou mot de passe incorrect.")
     else:

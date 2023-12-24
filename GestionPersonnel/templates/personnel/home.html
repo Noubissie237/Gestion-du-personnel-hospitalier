@@ -7,7 +7,11 @@
     <section id="hero-animated" class="hero-animated d-flex align-items-center">
         <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative" data-aos="zoom-out">
             <img src="{% static 'img/homeDoctor.svg' %} " class="img-fluid animated">
-            <h2>Bonjour <span>Dr {{ name }}</span></h2>
+            
+            {% if user.is_authenticated %}
+                <h2>Bonjour <span>Dr {{ name }}</span></h2>
+            {% endif %}
+            
             <p>Nous sommes heureux de vous revoir. Vos patients n'attendent que vous !!! </p>
             <div class="d-flex">
                 <a href="/file-d-attente" class="btn-get-started scrollto">File d'attente</a>
