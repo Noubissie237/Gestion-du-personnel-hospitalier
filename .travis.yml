@@ -5,13 +5,14 @@ services:
 
 before_script:
   - cd GestionPersonnel/
-  - docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+  - docker-compose up -d
 
 script:
   - echo "Build étape par Travis CI"
 
 after_success:
   - echo "L'application a été déployée avec succès"
+  - docker-compose down
 
 after_failure:
   - echo "Le déploiement a échoué"
