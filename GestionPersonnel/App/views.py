@@ -52,6 +52,28 @@ def file_d_attente(request):
 
         if response.status_code == 200:
             patients = response.json()
+            for elt in patients:         
+                if elt['service'] == 1:
+                    elt['service']  = 'RADIOLOGUE'
+                elif elt['service'] == 2:
+                    elt['service']  = 'PSYCHIATRE'
+                elif elt['service'] == 3:
+                    elt['service']  = 'PEDIATRE'
+                elif elt['service'] == 4:
+                    elt['service']  = 'OPTHAMOLOGUE'
+                elif elt['service'] == 5:
+                    elt['service']  = 'NEUROLOGUE'
+                elif elt['service'] == 6:
+                    elt['service']  = 'GYNECOLOGUE'
+                elif elt['service'] == 7:
+                    elt['service']  = 'GENERALISTE'
+                elif elt['service'] == 8:
+                    elt['service']  = 'DENTISTE'
+                elif elt['service'] == 9:
+                    elt['service']  = 'CHIRUGIEN'
+                elif elt['service'] == 10:
+                    elt['service']  = 'CARDIOLOGUE'
+            
             return render(request, 'personnel/file_d_attente.html', context={"data" : patients})
         else:
             print('Erreur lors de la récupération des patients.')
