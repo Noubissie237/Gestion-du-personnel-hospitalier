@@ -5,16 +5,12 @@
 {% block content %}
 
 
-<!-- Icons font CSS-->
 <link href="{% static 'forms/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
 <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-<!-- Font special for pages-->
 
-<!-- Vendor CSS-->
 <link href="{% static 'forms/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
 <link href="{% static 'forms/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
 
-<!-- Main CSS-->
 <link href="{% static 'forms/css/main.css' %}" rel="stylesheet" media="all">
 
 
@@ -23,10 +19,10 @@
         <div class="card card-1">
             <div class="card-body">
                 <h2 class="title text-center text-primary">PRESCRIPTION MEDICAL</h2>
-                
+
                 <form method="POST">
                     {% csrf_token %}
-                <div class="input-group">
+                    <div class="input-group">
                         <input class="input--style-1" type="text" placeholder="NOM" name="nom">
                     </div>
                     <div class="input-group">
@@ -35,12 +31,12 @@
                     <div class="row row-space">
                         <div class="col-2">
                             <div class="input-group">
-                                <input class="input--style-1" type="number" placeholder="AGE" name="res_code">
+                                <input class="input--style-1" type="number" placeholder="AGE" name="age">
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
-                                <input class="input--style-1" type="text" placeholder="SEXE" name="res_code">
+                                <input class="input--style-1" type="text" placeholder="SEXE" name="sexe">
                             </div>
                         </div>
                     </div>
@@ -49,7 +45,8 @@
                     </div>
 
                     <div class="input-group">
-                        <textarea class="input--style-1" name="" id="" cols="60" rows="5" placeholder="  ANTECEDENTS MEDICAUX"></textarea>
+                        <textarea class="input--style-1" name="antecedent" id="" cols="60" rows="5"
+                            placeholder="  ANTECEDENTS MEDICAUX"></textarea>
                     </div>
 
                     <div class="input-group">
@@ -74,26 +71,12 @@
 </div>
 
 
-
-
-
-
-
-
-
-<!-- Jquery JS-->
 <script src="{% static 'forms/vendor/jquery/jquery.min.js' %}"></script>
-<!-- Vendor JS-->
 <script src="{% static 'forms/vendor/select2/select2.min.js' %}"></script>
 <script src="{% static 'forms/vendor/datepicker/moment.min.js' %}"></script>
 <script src="{% static 'forms/vendor/datepicker/daterangepicker.js' %}"></script>
 
-<!-- Main JS-->
 <script src="{% static 'forms/js/global.js' %}"></script>
-
-
-
-
 
 
 {% endblock content %}

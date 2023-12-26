@@ -2,7 +2,7 @@ from django.http import HttpResponse
 import requests
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
-from .models import Medecin
+from .models import Medecin, Prescription
 from .serializers import MedecinSerializer
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, PrescriptionForm
@@ -88,11 +88,21 @@ def file_d_attente(request):
 @login_required(login_url='/login')
 def patient(request, link_Id):
     if request.method == 'POST':
-        # form = PrescriptionForm(request.POST)
-        form = request.POST
-        print(form)
+        data = request.POST
+        
+        dataToSave = PrescriptionForm(request.POST)
+        if dataToSave.is_valid():
+            print("Successs")
+            pushit = Prescription.objects.create(nom=data['nom'], prenom=data['prenom'], 
+                                                age=data['age'], sexe=data['sexe'], email=data['email'],
+                                                antecedent=data['antecedent'], prescription1=data['presc1'],
+                                                prescription2=data['presc2'], prescription3=data['presc3']
+                                                )
+
+        else:
+            print("Failed")
+
     else:
-        # form = PrescriptionForm()
         pass
 
     return render(request, 'personnel/patient.html')
