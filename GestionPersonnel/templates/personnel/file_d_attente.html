@@ -28,7 +28,7 @@
                             <a href="#"><img src="{% static 'img/women.jpeg' %}" width="25" /></a>
                         </th>
                         {% endif %}
-                        <td><a href="#" class="text-primary fw-bold">{{ elt.nom }}</a></td>
+                        <td><a href="/patient/{{ elt }}" class="text-primary fw-bold">{{ elt.nom }}</a></td>
                         <td>{{ elt.prenom }}</td>
                         
                         {% if elt.sexe == 1 %}

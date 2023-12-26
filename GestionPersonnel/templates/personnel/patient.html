@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<!-- Icons font CSS-->
+<link href="{% static 'forms/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+<link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+<!-- Font special for pages-->
+
+<!-- Vendor CSS-->
+<link href="{% static 'forms/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+<link href="{% static 'forms/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+<!-- Main CSS-->
+<link href="{% static 'forms/css/main.css' %}" rel="stylesheet" media="all">
+
+
+<div class="page-wrapper p-t-100 p-b-100 font-robo">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-1">
+            <div class="card-body">
+                <h2 class="title">Informations du patient</h2>
+                <form method="POST">
+                    <div class="input-group">
+                        <input class="input--style-1" type="text" placeholder="NOM" name="nom">
+                    </div>
+                    <div class="input-group">
+                        <input class="input--style-1" type="text" placeholder="PRENOM" name="prenom">
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <input class="input--style-1" type="number" placeholder="AGE" name="res_code">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <input class="input--style-1" type="text" placeholder="SEXE" name="res_code">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input class="input--style-1" type="email" placeholder="EMAIL" name="email">
+                    </div>
+
+                    <div class="p-t-20">
+                        <button class="btn btn--radius btn--green" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- Jquery JS-->
+<script src="{% static 'forms/vendor/jquery/jquery.min.js' %}"></script>
+<!-- Vendor JS-->
+<script src="{% static 'forms/vendor/select2/select2.min.js' %}"></script>
+<script src="{% static 'forms/vendor/datepicker/moment.min.js' %}"></script>
+<script src="{% static 'forms/vendor/datepicker/daterangepicker.js' %}"></script>
+
+<!-- Main JS-->
+<script src="{% static 'forms/js/global.js' %}"></script>
+
+
+
+
+
+
+{% endblock content %}

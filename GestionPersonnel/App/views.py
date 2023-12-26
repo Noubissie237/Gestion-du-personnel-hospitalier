@@ -7,6 +7,7 @@ from .serializers import MedecinSerializer
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm
 from django.contrib.auth.decorators import login_required
+import json
 
 
 class MedecinViewSet(viewsets.ModelViewSet):
@@ -42,6 +43,7 @@ def consultations(request):
 @login_required(login_url='/login')
 def prescription(request):
     return render(request, 'personnel/prescription.html')
+
 
 @login_required(login_url='/login')
 def file_d_attente(request):
@@ -83,6 +85,13 @@ def file_d_attente(request):
         return render(request, 'personnel/microFailed.html')
     
     # return render(request, 'personnel/file_d_attente.html')
+
+@login_required(login_url='/login')
+def patient(request, link_Id):
+    infos = (link_Id)
+    print(infos)
+    return render(request, 'personnel/patient.html', context={'info' : infos})
+
 
 def login_view(request):
     if request.method == 'POST':
