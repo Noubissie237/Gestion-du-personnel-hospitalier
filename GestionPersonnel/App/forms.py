@@ -15,6 +15,12 @@ class LoginForm(forms.Form):
     password = forms.CharField(label='Mot de passe', widget=PasswordInputWithClass())
 
 
-class Patients(forms.Form):
-    nom = forms.CharField(label='Nom du patient', widget=forms.TextInput(attrs={'class': 'form-control'}))
-    prenom = forms.CharField(label='Prénom du patient', widget=forms.TextInput(attrs={'class': 'form-control'}))
+class PrescriptionForm(forms.Form):
+    nom = forms.CharField(label='Nom', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    prenom = forms.CharField(label='Prénom', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    age = forms.IntegerField(required=False, label="Age")
+    sexe = forms.CharField(required=False, label="Sexe")
+    email = forms.EmailField(required=True, label="Email")
+    prescription1 = forms.CharField(required=False, label="Prescription",)
+    prescription2 = forms.CharField(required=False, label="Prescription",)
+    prescription3 = forms.CharField(required=False, label="Prescription",)

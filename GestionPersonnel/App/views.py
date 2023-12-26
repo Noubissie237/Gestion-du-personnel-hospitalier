@@ -5,7 +5,7 @@ from rest_framework import viewsets
 from .models import Medecin
 from .serializers import MedecinSerializer
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm
+from .forms import LoginForm, PrescriptionForm
 from django.contrib.auth.decorators import login_required
 import json
 
@@ -44,7 +44,6 @@ def consultations(request):
 def prescription(request):
     return render(request, 'personnel/prescription.html')
 
-
 @login_required(login_url='/login')
 def file_d_attente(request):
 
@@ -62,7 +61,7 @@ def file_d_attente(request):
                 elif elt['service'] == 3:
                     elt['service']  = 'PEDIATRE'
                 elif elt['service'] == 4:
-                    elt['service']  = 'OPTHAMOLOGUE'
+                    elt['service']  = 'OPHTAMOLOGUE'
                 elif elt['service'] == 5:
                     elt['service']  = 'NEUROLOGUE'
                 elif elt['service'] == 6:
@@ -72,7 +71,7 @@ def file_d_attente(request):
                 elif elt['service'] == 8:
                     elt['service']  = 'DENTISTE'
                 elif elt['service'] == 9:
-                    elt['service']  = 'CHIRUGIEN'
+                    elt['service']  = 'CHIRURGIEN'
                 elif elt['service'] == 10:
                     elt['service']  = 'CARDIOLOGUE'
             
@@ -88,9 +87,15 @@ def file_d_attente(request):
 
 @login_required(login_url='/login')
 def patient(request, link_Id):
-    infos = (link_Id)
-    print(infos)
-    return render(request, 'personnel/patient.html', context={'info' : infos})
+    if request.method == 'POST':
+        # form = PrescriptionForm(request.POST)
+        form = request.POST
+        print(form)
+    else:
+        # form = PrescriptionForm()
+        pass
+
+    return render(request, 'personnel/patient.html')
 
 
 def login_view(request):

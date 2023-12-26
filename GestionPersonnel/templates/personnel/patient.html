@@ -22,9 +22,11 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-1">
             <div class="card-body">
-                <h2 class="title">Informations du patient</h2>
+                <h2 class="title text-center text-primary">PRESCRIPTION MEDICAL</h2>
+                
                 <form method="POST">
-                    <div class="input-group">
+                    {% csrf_token %}
+                <div class="input-group">
                         <input class="input--style-1" type="text" placeholder="NOM" name="nom">
                     </div>
                     <div class="input-group">
@@ -46,8 +48,24 @@
                         <input class="input--style-1" type="email" placeholder="EMAIL" name="email">
                     </div>
 
+                    <div class="input-group">
+                        <textarea class="input--style-1" name="" id="" cols="60" rows="5" placeholder="  ANTECEDENTS MEDICAUX"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <input class="input--style-1" type="text" placeholder="PRESCRIPTION 1" name="presc1">
+                    </div>
+
+                    <div class="input-group">
+                        <input class="input--style-1" type="text" placeholder="PRESCRIPTION 2" name="presc2">
+                    </div>
+
+                    <div class="input-group">
+                        <input class="input--style-1" type="text" placeholder="PRESCRIPTION 3" name="presc3">
+                    </div>
+
                     <div class="p-t-20">
-                        <button class="btn btn--radius btn--green" type="submit">Submit</button>
+                        <button class="btn btn--radius btn--green" type="submit">Enrégistrer</button>
                     </div>
                 </form>
             </div>

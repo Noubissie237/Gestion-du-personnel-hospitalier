@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% load static %} {% block content %}
 
+
 <div class="col-12" style="margin-top: 15vh">
     <h2 class="text-center">File d'attente</h2>
     <div class="card top-selling overflow-auto mt-5">
@@ -17,7 +18,6 @@
                 </thead>
                 <tbody>
                     {% for elt in data %}
-
                     <tr class="userLine">
                         {% if elt.sexe == 1 %}
                         <th scope="row">

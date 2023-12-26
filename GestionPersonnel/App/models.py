@@ -19,15 +19,19 @@ class Medecin(AbstractUser):
     def __str__(self):
         return self.nom
 
-class Consultation(models.Model):
-    pass
+# class Consultation(models.Model):
+#     pass
 
 class Prescription(models.Model):
     nom = models.CharField(max_length=100)
     prenom = models.CharField(max_length=100, null=True)
-    email = models.EmailField(max_length=254, unique=True)
-    sexe = models.CharField(max_length=15)
     age = models.IntegerField(null=True)
-    poids = models.IntegerField(null=True)
+    sexe = models.CharField(max_length=15)
+    email = models.EmailField(max_length=254, null=False, unique=True)
     antecedent = models.TextField(null=True)
-    prescription = models.TextField(null=True)
+    prescription1 = models.CharField(max_length=150, null=True)
+    prescription2 = models.CharField(max_length=150, null=True)
+    prescription3 = models.CharField(max_length=150, null=True)
+
+    def __str__(self):
+        return self.nom
