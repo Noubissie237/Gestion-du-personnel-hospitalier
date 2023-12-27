@@ -4,7 +4,66 @@
 
 {% block content %}
 
+<div class="col-12" style="margin-top: 15vh">
+    <h2 class="text-center">File d'attente</h2>
+    <div class="card top-selling overflow-auto mt-5">
+        <div class="card-body pb-0">
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="col">Images</th>
+                        <th scope="col">Noms</th>
+                        <th scope="col">Prénoms</th>
+                        <th scope="col">Sexes</th>
+                        <th scope="col">Ages</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
 
+
+                    {% for elt in data %}
+                    <tr class="userLine">
+                        {% if elt.sexe == 1 %}
+                        <th scope="row">
+                            <a href="#"><img src="{% static 'img/men.png' %}" width="25" /></a>
+                        </th>
+                        {% else %}
+                        <th scope="row">
+                            <a href="#"><img src="{% static 'img/women.jpeg' %}" width="25" /></a>
+                        </th>
+                        {% endif %}
+                        <td>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="pk" value="{{ elt.email }}">
+                                <button type="submit" class="text-primary fw-bold bg-light" style="border: 0;">{{elt.nom }}</button>
+                            </form>
+
+                        </td>
+
+                        <!-- <td><a href="/patient/{{ elt }}" class="text-primary fw-bold">{{ elt.nom }}</a></td> -->
+                        <td>{{ elt.prenom }}</td>
+
+                        {% if elt.sexe == 1 %}
+                        <td>MASCULIN</td>
+                        {% else %}
+                        <td>FEMININ</td>
+                        {% endif %}
+
+                        <td class="fw-bold">{{ elt.age }}</td>
+                        <td><span class="badge bg-success">Accepté</span></td>
+
+                    </tr>
+                    <input type="hidden" id="doctSpeciality" value={{ user.Specialite }}>
+                    <input type="hidden" class="customerLookingFor" value={{ elt.service }}>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/file-d-attente.js' %}"></script>
 
 {% endblock content %}
 
