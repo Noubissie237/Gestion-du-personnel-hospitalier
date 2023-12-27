@@ -40,19 +40,61 @@ def appointment(request):
 
 @login_required(login_url='/login')
 def consultations(request):
-    patient = Consultation.objects.filter(status=True).values()
+    
+    if request.method == 'POST':
+
+        data = request.POST
+
+        data = Prescription.objects.filter(email=data['pk']).values()
+
+        data = json.dumps(list(data))
+
+        data = json.loads(data)
+
+        data = data[0]
+
+        print(data)
+            
+        json_data = json.dumps(data)
+
+        encoded_data = base64.urlsafe_b64encode(json_data.encode()).decode()
+
+        return HttpResponseRedirect(('/prescription') + f'?data={encoded_data}')
+
+    else:
+
+        patient = Consultation.objects.filter(status=True).values()
                 
-    patient = json.dumps(list(patient))
+        patient = json.dumps(list(patient))
 
-    patient = json.loads(patient)
+        patient = json.loads(patient)
 
-    patient = modif(patient)
+        patient = modif(patient)
 
-    return render(request, 'personnel/consultations.html', context={"data" : patient})
+        return render(request, 'personnel/consultations.html', context={"data" : patient})
+    
 
 @login_required(login_url='/login')
 def prescription(request):
-    return render(request, 'personnel/prescription.html')
+
+    try:
+        encoded_data = request.GET.get('data')
+
+        decoded_data = base64.urlsafe_b64decode(encoded_data).decode()
+
+        data = json.loads(decoded_data)
+
+        person = {}
+
+        tmp = {}
+
+        for key, value in data.items():
+            tmp[key] = value
+            person = (tmp)
+
+        return render(request, 'personnel/prescription.html', context={"data" : person})
+    except:
+        return render(request, 'personnel/notPatient.html')
 
 def modif(dataset):
     for elt in dataset:         
@@ -78,12 +120,6 @@ def modif(dataset):
             elt['service']  = 'CARDIOLOGUE'
 
     return dataset
-
-def onlyValid(dataset):
-    pass
-
-def onlyInvalid(dataset):
-    pass
 
 @login_required(login_url='/login')
 def file_d_attente(request):
@@ -142,7 +178,6 @@ def file_d_attente(request):
     except:
 
         return render(request, 'personnel/microFailed.html')
-    
 
 @login_required(login_url='/login')
 def patient(request):
@@ -194,10 +229,6 @@ def patient(request):
     else:
 
         return render(request, 'personnel/patient.html', context={"data" : person})
-
-
-
-
 
 def login_view(request):
     if request.method == 'POST':

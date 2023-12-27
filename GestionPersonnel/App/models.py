@@ -41,7 +41,6 @@ class Prescription(models.Model):
     prescription1 = models.CharField(max_length=150, null=True)
     prescription2 = models.CharField(max_length=150, null=True)
     prescription3 = models.CharField(max_length=150, null=True)
-    Date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.nom

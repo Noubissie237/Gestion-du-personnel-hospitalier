@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container" style="color:red; margin-top: 10vh;">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="text-center mt-5">
+          <h1 class="display-4">Comportement inatendu ! </h1>
+          <p class="lead">Pour accéder a cette page, vous devez choisir le patient dont vous souhaitez afficher ses informations</p>
+          <p class="lead">
+            <a class="btn-getstarted scrollto" href="/consultations">
+                <i class="bi bi-arrow-left-square-fill"></i>
+                <span>Liste des patients</span>
+              </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
