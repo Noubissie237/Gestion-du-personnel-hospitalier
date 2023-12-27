@@ -19,8 +19,17 @@ class Medecin(AbstractUser):
     def __str__(self):
         return self.nom
 
-# class Consultation(models.Model):
-#     pass
+class Consultation(models.Model):
+    nom = models.CharField(max_length=50, null=True)
+    prenom = models.CharField(max_length=50, null=True)
+    email = models.EmailField(max_length=254, null=True)
+    age = models.IntegerField(null=True)
+    service = models.IntegerField(null=True)
+    sexe = models.IntegerField(null=True)
+    status = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.nom
 
 class Prescription(models.Model):
     nom = models.CharField(max_length=100)
@@ -36,3 +45,4 @@ class Prescription(models.Model):
 
     def __str__(self):
         return self.nom
+    

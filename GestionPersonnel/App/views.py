@@ -2,7 +2,7 @@ from django.http import HttpResponse
 import requests
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
-from .models import Medecin, Prescription
+from .models import Medecin, Prescription, Consultation
 from .serializers import MedecinSerializer
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, PrescriptionForm
@@ -44,68 +44,140 @@ def consultations(request):
 def prescription(request):
     return render(request, 'personnel/prescription.html')
 
+def modif(dataset):
+    for elt in dataset:         
+        if elt['service'] == 1:
+            elt['service']  = 'RADIOLOGUE'
+        elif elt['service'] == 2:
+            elt['service']  = 'PSYCHIATRE'
+        elif elt['service'] == 3:
+            elt['service']  = 'PEDIATRE'
+        elif elt['service'] == 4:
+            elt['service']  = 'OPHTAMOLOGUE'
+        elif elt['service'] == 5:
+            elt['service']  = 'NEUROLOGUE'
+        elif elt['service'] == 6:
+            elt['service']  = 'GYNECOLOGUE'
+        elif elt['service'] == 7:
+            elt['service']  = 'GENERALISTE'
+        elif elt['service'] == 8:
+            elt['service']  = 'DENTISTE'
+        elif elt['service'] == 9:
+            elt['service']  = 'CHIRURGIEN'
+        elif elt['service'] == 10:
+            elt['service']  = 'CARDIOLOGUE'
+
+    return dataset
+
+def onlyValid(dataset):
+    pass
+
+def onlyInvalid(dataset):
+    pass
+
 @login_required(login_url='/login')
 def file_d_attente(request):
 
     try:
         url = 'http://localhost:8001/patients/'
         response = requests.get(url)
+        dataToSave = response.json()
+
+        for elt in dataToSave:
+            if Consultation.objects.filter(email=elt['email']).exists():
+                pass
+            else:
+                tmp = Consultation(nom=elt['nom'],prenom=elt['prenom'], email=elt['email'], age=elt['age'], service=elt['service'], sexe=elt['sexe'])
+                tmp.save()
 
         if response.status_code == 200:
-            patients = response.json()
-            for elt in patients:         
-                if elt['service'] == 1:
-                    elt['service']  = 'RADIOLOGUE'
-                elif elt['service'] == 2:
-                    elt['service']  = 'PSYCHIATRE'
-                elif elt['service'] == 3:
-                    elt['service']  = 'PEDIATRE'
-                elif elt['service'] == 4:
-                    elt['service']  = 'OPHTAMOLOGUE'
-                elif elt['service'] == 5:
-                    elt['service']  = 'NEUROLOGUE'
-                elif elt['service'] == 6:
-                    elt['service']  = 'GYNECOLOGUE'
-                elif elt['service'] == 7:
-                    elt['service']  = 'GENERALISTE'
-                elif elt['service'] == 8:
-                    elt['service']  = 'DENTISTE'
-                elif elt['service'] == 9:
-                    elt['service']  = 'CHIRURGIEN'
-                elif elt['service'] == 10:
-                    elt['service']  = 'CARDIOLOGUE'
-            
-            return render(request, 'personnel/file_d_attente.html', context={"data" : patients})
+            if request.method == 'POST':
+                data = request.POST
+                patients = response.json()
+
+                # req = Consultation.objects.get(email=data['pk'])
+                
+                # req.status = True
+
+                # req.save()
+
+                # patient = Consultation.objects.filter(status=False).values()
+                
+                # patient = json.dumps(list(patient))
+
+                # patient = json.loads(patient)
+
+                # patient = modif(patient)
+
+                data = Consultation.objects.filter(email=data['pk']).values()
+
+                data = json.dumps(list(data))
+
+                data = json.loads(data)
+
+                data = modif(data)
+
+                data = data[0]
+                
+                return render(request, 'personnel/patient.html', context={"data" : data})
+            else:
+
+                patient = Consultation.objects.filter(status=False).values()
+                
+                patient = json.dumps(list(patient))
+
+                patient = json.loads(patient)
+
+                patient = modif(patient)
+
+                return render(request, 'personnel/file_d_attente.html', context={"data" : patient})
         else:
             print('Erreur lors de la récupération des patients.')
 
     except:
-        print("erreur")
         return render(request, 'personnel/microFailed.html')
     
     # return render(request, 'personnel/file_d_attente.html')
 
 @login_required(login_url='/login')
 def patient(request, link_Id):
-    if request.method == 'POST':
-        data = request.POST
+    return HttpResponse()
+    # if request.method == 'POST':
+
+    #     data = request.POST
+
+    #     print(data)
+
+        # req = Consultation.objects.get(email=data['pk'])
+                
+        # req.status = True
+ 
+        # req.save()
+
+
         
-        dataToSave = PrescriptionForm(request.POST)
-        if dataToSave.is_valid():
-            print("Successs")
-            pushit = Prescription.objects.create(nom=data['nom'], prenom=data['prenom'], 
-                                                age=data['age'], sexe=data['sexe'], email=data['email'],
-                                                antecedent=data['antecedent'], prescription1=data['presc1'],
-                                                prescription2=data['presc2'], prescription3=data['presc3']
-                                                )
+    #     dataToSave = PrescriptionForm(request.POST)
+    #     if dataToSave.is_valid():
+    #         print("Successs")
+    #         pushit = Prescription(nom=data['nom'], prenom=data['prenom'], 
+    #                                             age=data['age'], sexe=data['sexe'], email=data['email'],
+    #                                             antecedent=data['antecedent'], prescription1=data['presc1'],
+    #                                             prescription2=data['presc2'], prescription3=data['presc3']
+    #                                             )
 
-        else:
-            print("Failed")
+    #     else:
+    #         print("Failed")
 
-    else:
-        pass
+    # else:
 
-    return render(request, 'personnel/patient.html')
+    #     patient = Consultation.objects.filter(status=False).values()
+    #     patient = json.dumps(list(patient))
+    #     patient = json.loads(patient)
+    #     patient = modif(patient)
+    #     return render(request, 'personnel/file_d_attente.html', context={"data" : patient})
+
+
+
 
 
 def login_view(request):

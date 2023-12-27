@@ -11,7 +11,11 @@ class specialiteAdmin(admin.ModelAdmin):
 class prescriptionAdmin(admin.ModelAdmin):
     list_display = ('nom', 'prenom', 'age', 'sexe', 'email', 'antecedent','prescription1', 'prescription2', 'prescription3', 'Date')
 
+class consultationAdmin(admin.ModelAdmin):
+    list_display = ('nom', 'prenom', 'email', 'age', 'service', 'sexe','status')
+
 
 admin.site.register(Medecin, medecinAdmin)
 admin.site.register(Specialite, specialiteAdmin)
 admin.site.register(Prescription, prescriptionAdmin)
+admin.site.register(Consultation, consultationAdmin)

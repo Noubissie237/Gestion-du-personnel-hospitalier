@@ -17,6 +17,8 @@
                     </tr>
                 </thead>
                 <tbody>
+
+
                     {% for elt in data %}
                     <tr class="userLine">
                         {% if elt.sexe == 1 %}
@@ -28,15 +30,24 @@
                             <a href="#"><img src="{% static 'img/women.jpeg' %}" width="25" /></a>
                         </th>
                         {% endif %}
-                        <td><a href="/patient/{{ elt }}" class="text-primary fw-bold">{{ elt.nom }}</a></td>
+                        <td>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="pk" value="{{ elt.email }}">
+                                <button type="submit" class="text-primary fw-bold bg-light" style="border: 0;">{{elt.nom }}</button>
+                            </form>
+
+                        </td>
+
+                        <!-- <td><a href="/patient/{{ elt }}" class="text-primary fw-bold">{{ elt.nom }}</a></td> -->
                         <td>{{ elt.prenom }}</td>
-                        
+
                         {% if elt.sexe == 1 %}
                         <td>MASCULIN</td>
                         {% else %}
                         <td>FEMININ</td>
                         {% endif %}
-                        
+
                         <td class="fw-bold">{{ elt.age }}</td>
                         <td><span class="badge bg-warning">En attente</span></td>
 
@@ -49,5 +60,5 @@
         </div>
     </div>
 </div>
-<script src="{% static 'js/file-d-attente.js' %}" ></script>
+<script src="{% static 'js/file-d-attente.js' %}"></script>
 {% endblock content %}

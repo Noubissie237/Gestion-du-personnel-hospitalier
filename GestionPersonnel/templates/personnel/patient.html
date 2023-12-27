@@ -14,6 +14,7 @@
 <link href="{% static 'forms/css/main.css' %}" rel="stylesheet" media="all">
 
 
+
 <div class="page-wrapper p-t-100 p-b-100 font-robo">
     <div class="wrapper wrapper--w680">
         <div class="card card-1">
@@ -23,29 +24,33 @@
                 <form method="POST">
                     {% csrf_token %}
                     <div class="input-group">
-                        <input class="input--style-1" type="text" placeholder="NOM" name="nom">
+                        <input class="input--style-1 text-success" type="text" placeholder="NOM" name="nom" value="{{ data.nom }}">
                     </div>
                     <div class="input-group">
-                        <input class="input--style-1" type="text" placeholder="PRENOM" name="prenom">
+                        <input class="input--style-1 text-success" type="text" placeholder="PRENOM" name="prenom" value="{{ data.prenom }}">
                     </div>
                     <div class="row row-space">
                         <div class="col-2">
                             <div class="input-group">
-                                <input class="input--style-1" type="number" placeholder="AGE" name="age">
+                                <input class="input--style-1 text-success" type="tel" placeholder="AGE" name="age" value=" {{ data.age }} ">
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
-                                <input class="input--style-1" type="text" placeholder="SEXE" name="sexe">
+                                {% if data.sexe == 1 %}
+                                <input class="input--style-1 text-success" type="text" placeholder="SEXE" name="sexe" value="MASCULIN">
+                                {% else %}
+                                <input class="input--style-1 text-success" type="text" placeholder="SEXE" name="sexe" value="FEMININ">
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                     <div class="input-group">
-                        <input class="input--style-1" type="email" placeholder="EMAIL" name="email">
+                        <input class="input--style-1 text-success" type="email" placeholder="EMAIL" name="email" value="{{ data.email }}">
                     </div>
 
                     <div class="input-group">
-                        <textarea class="input--style-1" name="antecedent" id="" cols="60" rows="5"
+                        <textarea class="input--style-1 text" name="antecedent" id="" cols="60" rows="5"
                             placeholder="  ANTECEDENTS MEDICAUX"></textarea>
                     </div>
 
