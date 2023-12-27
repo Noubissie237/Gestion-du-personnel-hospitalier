@@ -1,4 +1,6 @@
-from django.http import HttpResponse
+import base64
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 import requests
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
@@ -119,7 +121,20 @@ def file_d_attente(request):
 
                 data = data[0]
                 
-                return render(request, 'personnel/patient.html', context={"data" : data})
+                # return render(request, 'personnel/patient.html', context={"data" : data})
+
+                # return redirect('/patient', context={"data" : data})
+            
+                json_data = json.dumps(data)
+
+                encoded_data = base64.urlsafe_b64encode(json_data.encode()).decode()
+
+                # return render(request, 'personnel/file_d_attente.html', context={"data" : patient})
+
+                return HttpResponseRedirect(('/patient') + f'?data={encoded_data}')
+
+                # return HttpResponseRedirect('/patient')
+            
             else:
 
                 patient = Consultation.objects.filter(status=False).values()
@@ -140,8 +155,25 @@ def file_d_attente(request):
     # return render(request, 'personnel/file_d_attente.html')
 
 @login_required(login_url='/login')
-def patient(request, link_Id):
-    return HttpResponse()
+def patient(request):
+
+    encoded_data = request.GET.get('data')
+    
+    decoded_data = base64.urlsafe_b64decode(encoded_data).decode()
+
+    data = json.loads(decoded_data)
+
+    person = {}
+
+    tmp = {}
+
+    for key, value in data.items():
+        tmp[key] = value
+        person = (tmp)
+
+    # data = json.dumps(data)
+    print(person)
+    return HttpResponse(person['email'])
     # if request.method == 'POST':
 
     #     data = request.POST

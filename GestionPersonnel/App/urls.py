@@ -15,5 +15,5 @@ urlpatterns = [
     path('file-d-attente/', file_d_attente),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
-    path('patient/<str:link_Id>', patient),
+    path('patient/', patient),
 ]
