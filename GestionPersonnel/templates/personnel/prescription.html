@@ -23,64 +23,64 @@
                 <form method="POST">
                     {% csrf_token %}
                     <div class="input-group">
-                        <input class="input--style-1 text-primary fw-bold" type="text" placeholder="NOM" name="nom"
+                        <input class="input--style-1 text-primary fw-bold" disabled type="text" disabled placeholder="NOM" name="nom"
                             value="{{ data.nom }}">
                     </div>
                     <div class="input-group">
-                        <input class="input--style-1 text-primary fw-bold" type="text" placeholder="PRENOM" name="prenom"
-                            value="{{ data.prenom }}">
+                        <input class="input--style-1 text-primary fw-bold" type="text" disabled placeholder="PRENOM"
+                            name="prenom" value="{{ data.prenom }}">
                     </div>
                     <div class="row row-space">
                         <div class="col-2">
                             <div class="input-group">
-                                <input class="input--style-1 text-primary fw-bold" type="tel" placeholder="AGE" name="age"
-                                    value=" {{ data.age }} ">
+                                <input class="input--style-1 text-primary fw-bold" type="tel" disabled placeholder="AGE"
+                                    name="age" value=" {{ data.age }} ">
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 {% if data.sexe == 1 %}
-                                <input class="input--style-1 text-primary fw-bold" type="text" placeholder="SEXE" name="sexe"
-                                    value="MASCULIN">
+                                <input class="input--style-1 text-primary fw-bold" type="text" disabled placeholder="SEXE"
+                                    name="sexe" value="MASCULIN">
                                 {% else %}
-                                <input class="input--style-1 text-primary fw-bold" type="text" placeholder="SEXE" name="sexe"
-                                    value="FEMININ">
+                                <input class="input--style-1 text-primary fw-bold" type="text" disabled placeholder="SEXE"
+                                    name="sexe" value="FEMININ">
                                 {% endif %}
                             </div>
                         </div>
                     </div>
                     <div class="input-group">
-                        <input class="input--style-1 text-primary fw-bold" type="email" placeholder="EMAIL" name="email"
+                        <input class="input--style-1 text-primary fw-bold" type="email" disabled placeholder="EMAIL" name="email"
                             value="{{ data.email }}">
                     </div>
 
                     <div class="input-group">
-                        <textarea class="input--style-1 text text-primary fw-bold" name="antecedent" id="" cols="60" rows="5"
-                            placeholder="  ANTECEDENTS MEDICAUX">  {{ data.antecedent }}</textarea>
+                        <textarea class="input--style-1 text text-primary fw-bold" disabled name="antecedent" id="" cols="60"
+                            rows="5" placeholder="  ANTECEDENTS MEDICAUX">  {{ data.antecedent }}</textarea>
                     </div>
 
                     <div class="input-group">
-                        <input class="input--style-1 text-primary fw-bold" type="text" placeholder="PRESCRIPTION 1" name="presc1" value="{{ data.prescription1 }}">
+                        <input class="input--style-1 text-primary fw-bold" type="text" disabled placeholder="PRESCRIPTION 1"
+                            name="presc1" value="{{ data.prescription1 }}">
                     </div>
 
                     <div class="input-group">
-                        <input class="input--style-1 text-primary fw-bold" type="text" placeholder="PRESCRIPTION 2" name="presc2" value="{{ data.prescription2 }}">
+                        <input class="input--style-1 text-primary fw-bold" type="text" disabled placeholder="PRESCRIPTION 2"
+                            name="presc2" value="{{ data.prescription2 }}">
                     </div>
 
                     <div class="input-group">
-                        <input class="input--style-1 text-primary fw-bold" type="text" placeholder="PRESCRIPTION 3" name="presc3" value="{{ data.prescription3 }}">
+                        <input class="input--style-1 text-primary fw-bold" type="text" disabled placeholder="PRESCRIPTION 3"
+                            name="presc3" value="{{ data.prescription3 }}">
                     </div>
 
-                    <div class="p-t-20">
-                        <button class="btn btn--radius btn--info w-100" type="submit">OK</button>
-                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-
+<script src="{% static 'js/deasactivate.js' %}"></script>
 <script src="{% static 'forms/vendor/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'forms/vendor/select2/select2.min.js' %}"></script>
 <script src="{% static 'forms/vendor/datepicker/moment.min.js' %}"></script>
