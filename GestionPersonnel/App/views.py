@@ -173,40 +173,47 @@ def patient(request):
 
     # data = json.dumps(data)
     print(person)
-    return HttpResponse(person['email'])
-    # if request.method == 'POST':
 
-    #     data = request.POST
+    # return HttpResponse(person['email'])
 
-    #     print(data)
 
-        # req = Consultation.objects.get(email=data['pk'])
+    if request.method == 'POST':
+
+        data = request.POST
+
+        print(data)
+
+        req = Consultation.objects.get(email=data['email'])
                 
-        # req.status = True
+        req.status = True
  
-        # req.save()
+        req.save()
 
+        dataToSave = PrescriptionForm(request.POST)
+        if dataToSave.is_valid():
+            print("Successs")
+            pushit = Prescription(nom=data['nom'], prenom=data['prenom'], 
+                                                age=data['age'], sexe=data['sexe'], email=data['email'],
+                                                antecedent=data['antecedent'], prescription1=data['presc1'],
+                                                prescription2=data['presc2'], prescription3=data['presc3']
+                                                )
+            
+            pushit.save()
+            
+            # return render(request, 'personnel/file_d_attente.html', context={"data" : patient})
 
+            return HttpResponseRedirect('/file-d-attente')
         
-    #     dataToSave = PrescriptionForm(request.POST)
-    #     if dataToSave.is_valid():
-    #         print("Successs")
-    #         pushit = Prescription(nom=data['nom'], prenom=data['prenom'], 
-    #                                             age=data['age'], sexe=data['sexe'], email=data['email'],
-    #                                             antecedent=data['antecedent'], prescription1=data['presc1'],
-    #                                             prescription2=data['presc2'], prescription3=data['presc3']
-    #                                             )
+        else:
+            print("Failed")
 
-    #     else:
-    #         print("Failed")
+    else:
 
-    # else:
-
-    #     patient = Consultation.objects.filter(status=False).values()
-    #     patient = json.dumps(list(patient))
-    #     patient = json.loads(patient)
-    #     patient = modif(patient)
-    #     return render(request, 'personnel/file_d_attente.html', context={"data" : patient})
+        # patient = Consultation.objects.filter(status=False).values()
+        # patient = json.dumps(list(patient))
+        # patient = json.loads(patient)
+        # patient = modif(patient)
+        return render(request, 'personnel/patient.html', context={"data" : person})
 
 
 
