@@ -5,19 +5,33 @@ import requests
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from .models import Medecin, Prescription, Consultation
-from .serializers import MedecinSerializer
+from .serializers import PrescriptionSerializer
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, PrescriptionForm
 from django.contrib.auth.decorators import login_required
 import json
 
 
-class MedecinViewSet(viewsets.ModelViewSet):
-    queryset = Medecin.objects.all()
-    serializer_class = MedecinSerializer
+class PrescriptionViewSet(viewsets.ModelViewSet):
+    queryset = Prescription.objects.all()
+    serializer_class = PrescriptionSerializer
 
 @login_required(login_url='/login')
 def home(request):
+
+    # Récupérer les données de la requête POST
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+
+    # Si les identifiants sont valides, faites une requête à l'API d'authentification pour obtenir un token
+    response = requests.post('http://localhost:2370/login/', data={'username': username, 'password': password})
+
+    if response.status_code == 200:
+        token = response.json().get('token')
+        print(token)
+    else:
+        print('Erreur')
+
     return render(request, 'personnel/home.html')
 
 @login_required(login_url='/login')
