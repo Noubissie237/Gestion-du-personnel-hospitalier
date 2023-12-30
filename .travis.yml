@@ -1,21 +1,17 @@
-sudo: required
+language: generic 
 
 services:
   - docker
 
-before_install:
-  - sudo apt-get update
-  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
-
 before_script:
-  - cd GestionPersonnel/
+  - cd GestionPersonnel/  
   - docker-compose up -d
 
 script:
-  - docker-compose exec web python manage.py test
+  - docker-compose run web python manage.py test  
 
 after_script:
-  - docker-compose down
+  - docker-compose down 
 
 notifications:
   email:
