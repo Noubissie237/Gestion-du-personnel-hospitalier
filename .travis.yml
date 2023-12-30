@@ -1,16 +1,21 @@
-language: python
-python:
-  - "3.8"
+sudo: required
 
 services:
   - docker
 
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+
 before_script:
-  - pip install docker-compose
   - cd GestionPersonnel/
+  - docker-compose up -d
 
 script:
-  - docker-compose run web python manage.py test
+  - docker-compose exec web python manage.py test
+
+after_script:
+  - docker-compose down
 
 notifications:
   email:
