@@ -9,7 +9,7 @@ class specialiteAdmin(admin.ModelAdmin):
     list_display = ('designation',)
 
 class prescriptionAdmin(admin.ModelAdmin):
-    list_display = ('nom', 'prenom', 'age', 'sexe', 'email', 'antecedent','prescription1', 'prescription2', 'prescription3')
+    list_display = ('nom', 'prenom', 'age', 'sexe', 'email', 'antecedent','prescription1', 'prescription2', 'prescription3', 'Token')
 
 class consultationAdmin(admin.ModelAdmin):
     list_display = ('nom', 'prenom', 'email', 'age', 'service', 'sexe','status')

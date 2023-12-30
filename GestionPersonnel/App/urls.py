@@ -6,7 +6,7 @@ router = DefaultRouter()
 router.register(r'prescriptions', PrescriptionViewSet)
 
 urlpatterns = [
-    path('api', include(router.urls)),
+    path('api/', include(router.urls)),
     path('', home),
     path('home/', home),
     path('rendez-vous/', appointment),

@@ -1,7 +1,5 @@
-import base64
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-import requests
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from .models import Medecin, Prescription, Consultation
@@ -9,28 +7,43 @@ from .serializers import PrescriptionSerializer
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, PrescriptionForm
 from django.contrib.auth.decorators import login_required
-import json
+import json, base64, requests, datetime, hashlib, random, string
+from GestionPersonnel import settings
+from django.contrib import messages
+from django.core.mail import send_mail
+
+
+from rest_framework.decorators import api_view, authentication_classes
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
 
 
 class PrescriptionViewSet(viewsets.ModelViewSet):
     queryset = Prescription.objects.all()
     serializer_class = PrescriptionSerializer
 
+def generer_mot_de_passe():
+    caracteres = string.ascii_letters + string.digits
+    mot_de_passe = ''.join(random.choice(caracteres) for _ in range(8))
+    return mot_de_passe
+
 @login_required(login_url='/login')
 def home(request):
 
-    # Récupérer les données de la requête POST
-    username = request.POST.get('username')
-    password = request.POST.get('password')
+    # # Récupérer les données de la requête POST
+    # username = request.POST.get('username')
+    # password = request.POST.get('password')
 
-    # Si les identifiants sont valides, faites une requête à l'API d'authentification pour obtenir un token
-    response = requests.post('http://localhost:2370/login/', data={'username': username, 'password': password})
+    # # Si les identifiants sont valides, faites une requête à l'API d'authentification pour obtenir un token
+    # response = requests.post('http://localhost:2370/login/', data={'username': username, 'password': password})
 
-    if response.status_code == 200:
-        token = response.json().get('token')
-        print(token)
-    else:
-        print('Erreur')
+    # if response.status_code == 200:
+    #     token = response.json().get('token')
+    #     print(token)
+    # else:
+    #     print('Erreur')
 
     return render(request, 'personnel/home.html')
 
@@ -87,7 +100,6 @@ def consultations(request):
 
         return render(request, 'personnel/consultations.html', context={"data" : patient})
     
-
 @login_required(login_url='/login')
 def prescription(request):
 
@@ -214,13 +226,13 @@ def patient(request):
 
         data = request.POST
 
-        print(data)
-
         req = Consultation.objects.get(email=data['email'])
                 
         req.status = True
  
         req.save()
+
+        mdp = generer_mot_de_passe()
 
         dataToSave = PrescriptionForm(request.POST)
 
@@ -229,10 +241,23 @@ def patient(request):
             pushit = Prescription(nom=data['nom'], prenom=data['prenom'], 
                                                 age=data['age'], sexe=data['sexe'], email=data['email'],
                                                 antecedent=data['antecedent'], prescription1=data['presc1'],
-                                                prescription2=data['presc2'], prescription3=data['presc3']
+                                                prescription2=data['presc2'], prescription3=data['presc3'], Token=mdp
                                                 )
             
             pushit.save()
+
+            mail = data['email']
+
+            subject = "ACCES A LA PHARMACIE"
+
+            message = "Hey M./Mme {}, accedez a notre pharmacie et achetez vos medicaments en toute securité!! \nRendez-vous vers le site approprié et entrer comme information de connexion les informations ci-dessous : \nUSERNAME : {}\nPASSWORD : {}\n".format(data['nom'], mail, mdp)
+            
+            from_email = settings.EMAIL_HOST_USER
+
+            to_list = [mail]
+
+            send_mail(subject, message, from_email, to_list, fail_silently=True)
+
             
             return HttpResponseRedirect('/file-d-attente')
         
@@ -263,3 +288,4 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('/login')
+

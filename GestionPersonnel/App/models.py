@@ -41,6 +41,7 @@ class Prescription(models.Model):
     prescription1 = models.CharField(max_length=150, null=True)
     prescription2 = models.CharField(max_length=150, null=True)
     prescription3 = models.CharField(max_length=150, null=True)
+    Token = models.CharField(max_length=10, null=True)
 
     def __str__(self):
         return self.nom
