@@ -250,7 +250,7 @@ def patient(request):
 
             subject = "ACCES A LA PHARMACIE"
 
-            message = "Hey M./Mme {}, accedez a notre pharmacie et achetez vos medicaments en toute securité!! \nRendez-vous vers le site approprié et entrer comme information de connexion les informations ci-dessous : \nUSERNAME : {}\nPASSWORD : {}\n".format(data['nom'], mail, mdp)
+            message = "Hey M./Mme {}, accedez a notre pharmacie et achetez vos medicaments en toute securité!! \nRendez-vous vers le site approprié et entrer comme information de connexion les informations ci-dessous : \n\nUSERNAME : {}\nPASSWORD : {}\n".format(data['nom'], mail, mdp)
             
             from_email = settings.EMAIL_HOST_USER
 

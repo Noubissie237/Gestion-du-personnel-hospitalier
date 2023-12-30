@@ -1,10 +1,14 @@
-language: bash
+language: python
+
+python:
+  - "3.9"
 
 services:
   - docker
 
 before_script:
   - cd GestionPersonnel/
+  - pip install docker-compose
   - docker-compose up -d
 
 script:

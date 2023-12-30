@@ -141,11 +141,11 @@ REST_FRAMEWORK = {
 
 
 AUTH_USER_MODEL = 'App.Medecin'
-EMAIL_USE_TLS = ('EMAIL_USE_TLS')
-EMAIL_HOST = ('EMAIL_HOST')
-EMAIL_HOST_USER = ('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = ('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = ('EMAIL_PORT')
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'dollarmohammed36@gmail.com'
+EMAIL_HOST_PASSWORD = 'dkjf wjap jsdu xbbt'
+EMAIL_PORT = 587
 
 try:
     from django.contrib.messages import constants as messages
