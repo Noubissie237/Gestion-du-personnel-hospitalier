@@ -1,5 +1,4 @@
 language: python
-
 python:
   - "3.8"
 
@@ -7,15 +6,11 @@ services:
   - docker
 
 before_script:
-  - cd GestionPersonnel/
   - pip install docker-compose
-  - docker-compose up -d
+  - cd GestionPersonnel/
 
 script:
-  - docker exec gestionpersonnel_web_1 python manage.py test
-
-after_script:
-  - docker-compose down
+  - docker-compose run web python manage.py test
 
 notifications:
   email:
