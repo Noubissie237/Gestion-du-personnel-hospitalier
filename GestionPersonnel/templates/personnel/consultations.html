@@ -24,7 +24,7 @@
 
                     {% for elt in data %}
                     <tr class="userLine">
-                        {% if elt.sexe == 1 %}
+                        {% if elt.sexe == 'MASCULIN' %}
                         <th scope="row">
                             <a href="#"><img src="{% static 'img/men.png' %}" width="25" /></a>
                         </th>
@@ -45,11 +45,8 @@
                         <!-- <td><a href="/patient/{{ elt }}" class="text-primary fw-bold">{{ elt.nom }}</a></td> -->
                         <td>{{ elt.prenom }}</td>
 
-                        {% if elt.sexe == 1 %}
-                        <td>MASCULIN</td>
-                        {% else %}
-                        <td>FEMININ</td>
-                        {% endif %}
+                        <td>{{ elt.sexe}} </td>
+
 
                         <td class="fw-bold">{{ elt.age }}</td>
                         <td><span class="badge bg-success">Accepté</span></td>

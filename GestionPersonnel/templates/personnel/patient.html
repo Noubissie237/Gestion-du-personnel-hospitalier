@@ -37,11 +37,7 @@
                         </div>
                         <div class="col-2">
                             <div class="input-group">
-                                {% if data.sexe == 1 %}
-                                <input class="input--style-1 text-success" type="text" placeholder="SEXE" name="sexe" value="MASCULIN">
-                                {% else %}
-                                <input class="input--style-1 text-success" type="text" placeholder="SEXE" name="sexe" value="FEMININ">
-                                {% endif %}
+                                <input class="input--style-1 text-success" type="text" placeholder="SEXE" name="sexe" value="{{data.sexe}}">
                             </div>
                         </div>
                     </div>

@@ -24,8 +24,8 @@ class Consultation(models.Model):
     prenom = models.CharField(max_length=50, null=True)
     email = models.EmailField(max_length=254, null=True)
     age = models.IntegerField(null=True)
-    service = models.IntegerField(null=True)
-    sexe = models.IntegerField(null=True)
+    service = models.CharField(max_length=50)
+    sexe = models.CharField(max_length=50)
     status = models.BooleanField(default=False)
 
     def __str__(self):

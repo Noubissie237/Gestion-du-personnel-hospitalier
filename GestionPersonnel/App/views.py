@@ -96,7 +96,7 @@ def consultations(request):
 
         patient = json.loads(patient)
 
-        patient = modif(patient)
+        # patient = modif(patient)
 
         return render(request, 'personnel/consultations.html', context={"data" : patient})
     
@@ -122,39 +122,38 @@ def prescription(request):
     except:
         return render(request, 'personnel/notPatient.html')
 
-def modif(dataset):
-    for elt in dataset:         
-        if elt['service'] == 1:
-            elt['service']  = 'RADIOLOGUE'
-        elif elt['service'] == 2:
-            elt['service']  = 'PSYCHIATRE'
-        elif elt['service'] == 3:
-            elt['service']  = 'PEDIATRE'
-        elif elt['service'] == 4:
-            elt['service']  = 'OPHTAMOLOGUE'
-        elif elt['service'] == 5:
-            elt['service']  = 'NEUROLOGUE'
-        elif elt['service'] == 6:
-            elt['service']  = 'GYNECOLOGUE'
-        elif elt['service'] == 7:
-            elt['service']  = 'GENERALISTE'
-        elif elt['service'] == 8:
-            elt['service']  = 'DENTISTE'
-        elif elt['service'] == 9:
-            elt['service']  = 'CHIRURGIEN'
-        elif elt['service'] == 10:
-            elt['service']  = 'CARDIOLOGUE'
+# def modif(dataset):
+#     for elt in dataset:         
+#         if elt['service'] == 1:
+#             elt['service']  = 'RADIOLOGUE'
+#         elif elt['service'] == 2:
+#             elt['service']  = 'PSYCHIATRE'
+#         elif elt['service'] == 3:
+#             elt['service']  = 'PEDIATRE'
+#         elif elt['service'] == 4:
+#             elt['service']  = 'OPHTAMOLOGUE'
+#         elif elt['service'] == 5:
+#             elt['service']  = 'NEUROLOGUE'
+#         elif elt['service'] == 6:
+#             elt['service']  = 'GYNECOLOGUE'
+#         elif elt['service'] == 7:
+#             elt['service']  = 'GENERALISTE'
+#         elif elt['service'] == 8:
+#             elt['service']  = 'DENTISTE'
+#         elif elt['service'] == 9:
+#             elt['service']  = 'CHIRURGIEN'
+#         elif elt['service'] == 10:
+#             elt['service']  = 'CARDIOLOGUE'
 
-    return dataset
+#     return dataset
 
 @login_required(login_url='/login')
 def file_d_attente(request):
 
     try:
-        url = 'http://localhost:8001/patients/'
+        url = 'http://localhost:8001/api/patients'
         response = requests.get(url)
         dataToSave = response.json()
-
         for elt in dataToSave:
             if Consultation.objects.filter(email=elt['email']).exists():
                 pass
@@ -176,7 +175,7 @@ def file_d_attente(request):
 
                 data = json.loads(data)
 
-                data = modif(data)
+                # data = modif(data)
 
                 data = data[0]
             
@@ -194,7 +193,7 @@ def file_d_attente(request):
 
                 patient = json.loads(patient)
 
-                patient = modif(patient)
+                # patient = modif(patient)
 
                 return render(request, 'personnel/file_d_attente.html', context={"data" : patient})
         else:
@@ -202,7 +201,6 @@ def file_d_attente(request):
             print('Erreur lors de la récupération des patients.')
 
     except:
-
         return render(request, 'personnel/microFailed.html')
 
 @login_required(login_url='/login')
@@ -250,8 +248,23 @@ def patient(request):
 
             subject = "ACCES A LA PHARMACIE"
 
-            message = "Hey M./Mme {}, accedez a notre pharmacie et achetez vos medicaments en toute securité!! \nRendez-vous vers le site approprié et entrer comme information de connexion les informations ci-dessous : \n\nUSERNAME : {}\nPASSWORD : {}\n".format(data['nom'], mail, mdp)
+            presc = "PRESCRIPTION 1 : "+data['presc1']
+
+            if len(data['presc2']) >= 1:
+                presc += f"\nPRESCRIPTION 2 : {data['presc2']}"
+
+            if len(data['presc3']) >= 1:
+                presc += f"\nPRESCRIPTION 3 : {data['presc3']}"
+
+            if data['sexe'] == 'MASCULIN':
+                poli = "M."
+            else:
+                poli = "Mme."
+
+
+            message = "Hey {} {}, accedez a notre pharmacie et achetez vos medicaments en toute securité!! \nRendez-vous vers le site approprié et entrer comme information de connexion les informations ci-dessous : \n\nUSERNAME : {}\nPASSWORD : {}\n\n{}".format(poli, data['nom'], mail, mdp, presc)
             
+
             from_email = settings.EMAIL_HOST_USER
 
             to_list = [mail]
