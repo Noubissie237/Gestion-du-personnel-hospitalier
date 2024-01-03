@@ -8,6 +8,6 @@ WORKDIR /app
 
 COPY . /app/
 
-RUN apt-get upgrade
+RUN apt-get upgrade && pip install --upgrade pip
 
 RUN pip install -r requirements.txt
