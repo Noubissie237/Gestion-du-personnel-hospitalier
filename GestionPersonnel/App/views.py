@@ -151,7 +151,7 @@ def prescription(request):
 def file_d_attente(request):
 
     try:
-        url = 'http://localhost:8001/api/patients'
+        url = 'http://gestionpatient:8001/api/patients'
         response = requests.get(url)
         dataToSave = response.json()
         for elt in dataToSave:
