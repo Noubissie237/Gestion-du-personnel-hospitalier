@@ -5,13 +5,15 @@ services:
 
 before_script:
   - cd GestionPersonnel/  
-  - docker-compose up -d
+  # - docker-compose up -d
 
 script:
-  - docker-compose run web python manage.py test  
+  # - docker-compose run web python manage.py test  
+  - ls
 
 after_script:
-  - docker-compose down 
+  # - docker-compose down 
+  - cd ..
 
 notifications:
   email:

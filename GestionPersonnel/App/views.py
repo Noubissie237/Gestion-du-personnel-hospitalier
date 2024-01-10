@@ -31,38 +31,10 @@ def generer_mot_de_passe():
 
 @login_required(login_url='/login')
 def home(request):
-
-    # # Récupérer les données de la requête POST
-    # username = request.POST.get('username')
-    # password = request.POST.get('password')
-
-    # # Si les identifiants sont valides, faites une requête à l'API d'authentification pour obtenir un token
-    # response = requests.post('http://localhost:2370/login/', data={'username': username, 'password': password})
-
-    # if response.status_code == 200:
-    #     token = response.json().get('token')
-    #     print(token)
-    # else:
-    #     print('Erreur')
-
     return render(request, 'personnel/home.html')
 
 @login_required(login_url='/login')
 def appointment(request):
-
-    # try:
-    #     url = 'http://localhost:8002/patients/'
-    #     response = requests.get(url)
-
-    #     if response.status_code == 200:
-    #         patients = response.json()
-    #         return render(request, 'personnel/appointment.html', context={"data" : patients})
-    #     else:
-    #         print('Erreur lors de la récupération des rendez-vous.')
-
-    # except:
-    #     return render(request, 'personnel/microFailed.html')
-
     return render(request, 'personnel/appointment.html')
 
 @login_required(login_url='/login')
@@ -121,31 +93,6 @@ def prescription(request):
         return render(request, 'personnel/prescription.html', context={"data" : person})
     except:
         return render(request, 'personnel/notPatient.html')
-
-# def modif(dataset):
-#     for elt in dataset:         
-#         if elt['service'] == 1:
-#             elt['service']  = 'RADIOLOGUE'
-#         elif elt['service'] == 2:
-#             elt['service']  = 'PSYCHIATRE'
-#         elif elt['service'] == 3:
-#             elt['service']  = 'PEDIATRE'
-#         elif elt['service'] == 4:
-#             elt['service']  = 'OPHTAMOLOGUE'
-#         elif elt['service'] == 5:
-#             elt['service']  = 'NEUROLOGUE'
-#         elif elt['service'] == 6:
-#             elt['service']  = 'GYNECOLOGUE'
-#         elif elt['service'] == 7:
-#             elt['service']  = 'GENERALISTE'
-#         elif elt['service'] == 8:
-#             elt['service']  = 'DENTISTE'
-#         elif elt['service'] == 9:
-#             elt['service']  = 'CHIRURGIEN'
-#         elif elt['service'] == 10:
-#             elt['service']  = 'CARDIOLOGUE'
-
-#     return dataset
 
 @login_required(login_url='/login')
 def file_d_attente(request):
