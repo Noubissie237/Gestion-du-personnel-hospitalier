@@ -2,7 +2,6 @@ language: generic
 
 services:
   - docker
-
 before_script:
   - cd GestionPersonnel/  
   # - docker-compose up -d
